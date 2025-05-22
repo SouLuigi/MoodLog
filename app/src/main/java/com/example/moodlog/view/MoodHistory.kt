@@ -37,6 +37,5 @@ fun MoodHistory(
             )
         }
     )
-    {
-    }
+    {}
 }
