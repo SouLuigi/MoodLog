@@ -28,6 +28,7 @@ import com.example.moodlog.ui.theme.White_My
 
 @Composable
 fun EmojiGrid(
+    modifier: Modifier,
     emojis: List<MoodType>,
     onEmojiSelect: (MoodType) -> Unit,
     selectedEmoji: MoodType?
@@ -37,7 +38,7 @@ fun EmojiGrid(
         columns = GridCells.Fixed(4),
         contentPadding = PaddingValues(horizontal = 16.dp),
         modifier = Modifier
-            .padding(16.dp)
+            .padding(16.dp, 0.dp, 16.dp, 16.dp)
             .fillMaxWidth()
             .background(White_My,RoundedCornerShape(12.dp)),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -46,7 +47,8 @@ fun EmojiGrid(
             items(emojis) { emoji ->
             Box(
                 modifier = Modifier
-                    .size(64.dp)
+                    .padding(0.dp, 6.dp, 0.dp, 6.dp)
+                    .size(width = 60.dp, height = 60.dp)
                     .clickable { onEmojiSelect(emoji) }
                     .background(
                         if (emoji == selectedEmoji) Color.LightGray else Color.Transparent,

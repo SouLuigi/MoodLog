@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,62 +37,68 @@ fun MoodScreen(
     navController: NavController
 
 ) {
-        Column(
+    var selectedEmoji by remember { mutableStateOf<MoodType?>(null) }
+    var descriptionBox by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(White_My)
+
+    )
+    {
+        Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight()
-                .background(White_My)
-
-        ) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                textAlign = TextAlign.Center,
-                text = "MoodLog",
-                color = Yellow_My,
-                fontSize = 50.sp,
-            )
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                textAlign = TextAlign.Center,
-                text = "Como você está se sentindo hoje?",
-                color = Blue_My,
-                fontSize = 23.sp,
-            )
-            var selectedEmoji by remember { mutableStateOf<MoodType?>(null) }
-            EmojiGrid(
-                emojis = listOf(
-                    MoodType.HAPPY,
-                    MoodType.IN_LOVE,
-                    MoodType.ANGRY,
-                    MoodType.CONFUSED,
-                    MoodType.SAD,
-                    MoodType.NEUTRAL,
-                    MoodType.EXCITED,
-                    MoodType.TIRED
-                ),
-                selectedEmoji = selectedEmoji,
-                onEmojiSelect = {emoji ->
-                    selectedEmoji = emoji
-                },
-
-            )
-//            TextBox(
-//                value = TODO(),
-//                onValueChange = TODO(),
-//                modifier = Modifier.fillMaxWidth(),
-//                label = TODO(),
-//                maxLines = TODO(),
-//                keyboardType = TODO()
-//            )
-        }
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+            text = "MoodLog",
+            color = Yellow_My,
+            fontSize = 50.sp,
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            textAlign = TextAlign.Center,
+            text = "Como você está se sentindo hoje?",
+            color = Blue_My,
+            fontSize = 23.sp,
+        )
+        EmojiGrid(
+            emojis = listOf(
+                MoodType.HAPPY,
+                MoodType.IN_LOVE,
+                MoodType.ANGRY,
+                MoodType.CONFUSED,
+                MoodType.SAD,
+                MoodType.NEUTRAL,
+                MoodType.EXCITED,
+                MoodType.TIRED
+            ),
+            selectedEmoji = selectedEmoji,
+            onEmojiSelect = { emoji ->
+                selectedEmoji = emoji
+            },
+            modifier = Modifier
+        )
+        TextBox(
+            value = descriptionBox,
+            onValueChange = { descriptionBox = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp, 0.dp, 16.dp, 16.dp),
+            label = "Quer escrever algo sobre seu dia?",
+            maxLines = 5,
+            keyboardType = KeyboardType.Text,
+        )
     }
+}
+
 @Composable
 @Preview
-fun MoodScreenView(){
+fun MoodScreenView() {
     val navController = rememberNavController()
-    MoodScreen(navController =navController)
+    MoodScreen(navController = navController)
 }
