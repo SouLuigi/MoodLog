@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.compose.rememberNavController
+import com.example.moodlog.components.ButtonSave
 import com.example.moodlog.components.EmojiGrid
 import com.example.moodlog.components.TextBox
 import com.example.moodlog.domain.MoodType
@@ -85,14 +87,23 @@ fun MoodScreen(
         )
         TextBox(
             value = descriptionBox,
-            onValueChange = { descriptionBox = it },
+            onValueChange = { if (it.length <= 100) descriptionBox = it },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp, 0.dp, 16.dp, 16.dp),
+                .height(300.dp)
+                .padding(16.dp, 0.dp, 16.dp, 2.dp),
             label = "Quer escrever algo sobre seu dia?",
             maxLines = 5,
             keyboardType = KeyboardType.Text,
         )
+        Text(
+            text = "${descriptionBox.length}/100",
+            fontSize = 16.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp, 0.dp, 16.dp, 0.dp),
+        )
+        ButtonSave()
     }
 }
 

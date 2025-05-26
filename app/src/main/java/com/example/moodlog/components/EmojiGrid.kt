@@ -2,7 +2,9 @@ package com.example.moodlog.components
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,8 +24,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moodlog.domain.MoodType
-import com.example.moodlog.ui.theme.Gray_My
+import com.example.moodlog.ui.theme.Blue_My
 import com.example.moodlog.ui.theme.White_My
+import com.example.moodlog.ui.theme.Yellow_My
 
 
 @Composable
@@ -40,11 +43,11 @@ fun EmojiGrid(
         modifier = Modifier
             .padding(16.dp, 0.dp, 16.dp, 16.dp)
             .fillMaxWidth()
-            .background(White_My,RoundedCornerShape(12.dp)),
+            .background(White_My, RoundedCornerShape(12.dp)),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        ) {
-            items(emojis) { emoji ->
+    ) {
+        items(emojis) { emoji ->
             Box(
                 modifier = Modifier
                     .padding(0.dp, 6.dp, 0.dp, 6.dp)
@@ -57,9 +60,10 @@ fun EmojiGrid(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                   text = emoji.symbol,
+                    text = emoji.symbol,
                     fontSize = 40.sp,
-                    fontWeight = FontWeight.Bold,                )
+                    fontWeight = FontWeight.Bold,
+                )
             }
         }
     }
