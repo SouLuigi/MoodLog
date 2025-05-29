@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.moodlog.ui.theme.Blue_My
+import com.example.moodlog.ui.theme.Gray_My
 import com.example.moodlog.ui.theme.ShapeTextBox
 import com.example.moodlog.ui.theme.White_My
 import com.example.moodlog.ui.theme.Yellow_My
@@ -38,6 +39,7 @@ fun TextBox(
             cursorColor = Yellow_My,
             unfocusedLabelColor = Blue_My,
             focusedLabelColor = Yellow_My,
+            unfocusedContainerColor = Gray_My,
             focusedContainerColor = White_My,
             unfocusedIndicatorColor = Blue_My,
             focusedIndicatorColor = Yellow_My
