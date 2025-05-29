@@ -1,6 +1,9 @@
 package com.example.moodlog.navigation
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
@@ -14,6 +17,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -34,33 +39,41 @@ fun AppNavigation() {
             BottomAppBar(
                containerColor = Yellow_My
             ) {
-                IconButton(
+                Row(
+                ) {  IconButton(
+                    modifier = Modifier.weight(1f),
                     onClick = { navController.navigate(Routes.MOOD_SCREEN) },
                     enabled = currentRoute != Routes.MOOD_SCREEN
                 ) {
                     Icon(
+                        modifier = Modifier.size(50.dp),
                         imageVector = Icons.Default.Home,
                         contentDescription = "Tela de humor"
                     )
                 }
-                IconButton(
-                    onClick = { navController.navigate(Routes.MOOD_HISTORY) },
-                    enabled = currentRoute != Routes.MOOD_HISTORY
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.List,
-                        contentDescription = "Histórico de humor"
-                    )
-                }
-                IconButton(
-                    onClick = { navController.navigate(Routes.MOOD_STATISTIC) },
-                    enabled = currentRoute != Routes.MOOD_STATISTIC
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.AccountCircle,
-                        contentDescription = "Estatística de humor"
-                    )
-                }
+                    IconButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = { navController.navigate(Routes.MOOD_HISTORY) },
+                        enabled = currentRoute != Routes.MOOD_HISTORY
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(50.dp),
+                            imageVector = Icons.Default.List,
+                            contentDescription = "Histórico de humor"
+                        )
+                    }
+                    IconButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = { navController.navigate(Routes.MOOD_STATISTIC) },
+                        enabled = currentRoute != Routes.MOOD_STATISTIC
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(50.dp),
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "Estatística de humor"
+                        )
+                    } }
+
             }
         },
     ) { innerPadding ->
@@ -85,3 +98,4 @@ fun AppNavigation() {
         }
     }
 }
+

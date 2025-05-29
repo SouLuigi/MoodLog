@@ -26,7 +26,7 @@ fun ButtonSave(
     ) {
         Text(
             text = text,
-            fontSize = 18.sp
+            fontSize = 25.sp
         )
     }
 }

@@ -3,10 +3,10 @@ package com.example.moodlog.view
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -50,7 +50,6 @@ fun MoodScreen(
             .fillMaxWidth()
             .fillMaxHeight()
             .background(White_My)
-
     )
     {
         Text(
@@ -106,12 +105,14 @@ fun MoodScreen(
                 .fillMaxWidth()
                 .padding(16.dp, 0.dp, 16.dp, 0.dp),
         )
+
         ButtonSave(
             onClick = { navController.navigate("home") },
             modifier = Modifier
                 .width(262.dp)
                 .height(50.dp)
                 .padding(16.dp, 0.dp, 16.dp, 0.dp)
+                .offset(y = 40.dp)
                 .align(Alignment.CenterHorizontally),
             text = "Salvar"
         )
