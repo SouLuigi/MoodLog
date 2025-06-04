@@ -56,7 +56,7 @@ fun TextBox(
 @Preview
 fun TextBoxPreview(){
     TextBox(
-        value = "Luigi",
+        value = "",
         onValueChange = {},
         modifier = Modifier.fillMaxWidth(),
         label = "Descrição",
