@@ -99,7 +99,7 @@ fun MoodScreen(
         )
         TextBox(
             value = descriptionBox,
-            onValueChange = { if (it.length <= 100) descriptionBox = it },
+            onValueChange = { if (it.length <= 300) descriptionBox = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(300.dp)
@@ -109,7 +109,7 @@ fun MoodScreen(
             keyboardType = KeyboardType.Text,
         )
         Text(
-            text = "${descriptionBox.length}/100",
+            text = "${descriptionBox.length}/300",
             fontSize = 16.sp,
             modifier = Modifier
                 .fillMaxWidth()
@@ -120,15 +120,20 @@ fun MoodScreen(
             onClick = {
                 var message = false
                 scope.launch(Dispatchers.IO) {
-                    if (selectedEmoji != null) {
+                    if (selectedEmoji != null && descriptionBox.isNotEmpty()) {
                         message = true
+                        moodRepository.saveMood(selectedEmoji!!.symbol, descriptionBox)
                     }
                 }
                 scope.launch(Dispatchers.Main) {
                     if (message) {
                         Toast.makeText(context, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(context, "Emoji não selecionado", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Todos os campos devem ser preenchidos",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             },
