@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.moodlog.model.MoodModel
 import com.example.moodlog.ui.theme.White_My
 import com.example.moodlog.ui.theme.Yellow_My
+import com.google.firebase.Firebase
 
 
 @OptIn(ExperimentalMaterial3Api::class)
