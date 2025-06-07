@@ -66,7 +66,7 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Estudar programação diariamente é essencial para evoluir, criar projetos incríveis e conquistar objetivos.",
+                    text = description.toString(),
                     fontSize = 20.sp,
                     modifier = Modifier.weight(1f)
                 )
@@ -84,7 +84,7 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
-                    text = "😊",
+                    text = mood.toString(),
                     fontSize = 40.sp,
                     modifier = Modifier.padding(end = 10.dp)
                 )
@@ -93,9 +93,9 @@ fun MoodCard(
     }
 }
 
-@Composable
-@Preview
-private fun MoodCardPreview() {
-    MoodCard()
-
-}
+//@Composable
+//@Preview
+//private fun MoodCardPreview() {
+//    MoodCard()
+//
+//}
