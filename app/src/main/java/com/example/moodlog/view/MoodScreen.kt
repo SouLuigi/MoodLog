@@ -1,6 +1,7 @@
 package com.example.moodlog.view
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,9 +16,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,9 +33,12 @@ import com.example.moodlog.components.ButtonSave
 import com.example.moodlog.components.EmojiGrid
 import com.example.moodlog.components.TextBox
 import com.example.moodlog.domain.MoodType
+import com.example.moodlog.repository.MoodRepository
 import com.example.moodlog.ui.theme.Blue_My
 import com.example.moodlog.ui.theme.White_My
 import com.example.moodlog.ui.theme.Yellow_My
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +48,11 @@ fun MoodScreen(
     navController: NavController
 
 ) {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val moodRepository = MoodRepository()
     var selectedEmoji by remember { mutableStateOf<MoodType?>(null) }
+    var onEmojiSelect: (MoodType) -> Unit
     var descriptionBox by remember { mutableStateOf("") }
 
     Column(
@@ -107,7 +117,21 @@ fun MoodScreen(
         )
 
         ButtonSave(
-            onClick = { navController.navigate("home") },
+            onClick = {
+                var message = false
+                scope.launch(Dispatchers.IO) {
+                    if (selectedEmoji != null) {
+                        message = true
+                    }
+                }
+                scope.launch(Dispatchers.Main) {
+                    if (message) {
+                        Toast.makeText(context, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "Emoji não selecionado", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            },
             modifier = Modifier
                 .width(262.dp)
                 .height(50.dp)
