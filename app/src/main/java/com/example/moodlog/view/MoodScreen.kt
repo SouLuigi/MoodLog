@@ -60,8 +60,7 @@ fun MoodScreen(
             .fillMaxWidth()
             .fillMaxHeight()
             .background(White_My)
-    )
-    {
+    ) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
@@ -90,12 +89,9 @@ fun MoodScreen(
                 MoodType.NEUTRAL,
                 MoodType.EXCITED,
                 MoodType.TIRED
-            ),
-            selectedEmoji = selectedEmoji,
-            onEmojiSelect = { emoji ->
+            ), selectedEmoji = selectedEmoji, onEmojiSelect = { emoji ->
                 selectedEmoji = emoji
-            },
-            modifier = Modifier
+            }, modifier = Modifier
         )
         TextBox(
             value = descriptionBox,
@@ -130,9 +126,7 @@ fun MoodScreen(
                         Toast.makeText(context, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(
-                            context,
-                            "Todos os campos devem ser preenchidos",
-                            Toast.LENGTH_SHORT
+                            context, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
