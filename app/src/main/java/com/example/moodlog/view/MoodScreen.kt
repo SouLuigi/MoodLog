@@ -39,6 +39,7 @@ import com.example.moodlog.ui.theme.White_My
 import com.example.moodlog.ui.theme.Yellow_My
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -114,20 +115,16 @@ fun MoodScreen(
 
         ButtonSave(
             onClick = {
-                var message = false
-                scope.launch(Dispatchers.IO) {
-                    if (selectedEmoji != null && descriptionBox.isNotEmpty()) {
-                        message = true
-                        moodRepository.saveMood(selectedEmoji!!.symbol, descriptionBox)
-                    }
-                }
-                scope.launch(Dispatchers.Main) {
-                    if (message) {
+                scope.launch{
+                    if (selectedEmoji != null && descriptionBox.isNotBlank()) {
+                        withContext(Dispatchers.IO) {
+                            moodRepository.saveMood(selectedEmoji!!.symbol, descriptionBox)
+                        }
                         Toast.makeText(context, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(
-                            context, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT
-                        ).show()
+                        selectedEmoji = null
+                        descriptionBox = ""
+                    }else {
+                        Toast.makeText(context, "Todos os campos devem ser preenchidos", Toast.LENGTH_SHORT).show()
                     }
                 }
             },

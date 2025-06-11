@@ -7,6 +7,4 @@ class MoodRepository() {
     fun saveMood(mood: String, description: String) {
         dataSource.saveMood(mood, description)
     }
-
-
 }
