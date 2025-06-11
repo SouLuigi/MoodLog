@@ -32,19 +32,13 @@ import com.example.moodlog.ui.theme.Yellow_My
 
 @Composable
 fun MoodCard(
-    position: Int,
-    listaMood: List<MoodModel>
+    moodModel: MoodModel,
+    onDeleteClick: (() -> Unit)? = null
 ) {
-    var moodModel = MoodModel()
     var isSelected by remember { mutableStateOf(false) }
-    val mood = listaMood[position].mood
-    val description = listaMood[position].description
 
     Card(
-        colors = CardDefaults.cardColors(
-            containerColor = Gray_My,
-        ),
-
+        colors = CardDefaults.cardColors(containerColor = Gray_My),
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
@@ -66,14 +60,14 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = description.toString(),
+                    text = moodModel.description ?: "Sem descrição",
                     fontSize = 20.sp,
                     modifier = Modifier.weight(1f)
                 )
-                IconButton(onClick = {}) {
+                IconButton(onClick = { onDeleteClick?.invoke() }) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_delete),
-                        contentDescription = "Deletar Mood",
+                        contentDescription = "Deletar Mood"
                     )
                 }
             }
@@ -84,7 +78,7 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
-                    text = mood.toString(),
+                    text = moodModel.mood ?: "🤔",
                     fontSize = 40.sp,
                     modifier = Modifier.padding(end = 10.dp)
                 )
@@ -92,10 +86,3 @@ fun MoodCard(
         }
     }
 }
-
-//@Composable
-//@Preview
-//private fun MoodCardPreview() {
-//    MoodCard()
-//
-//}
