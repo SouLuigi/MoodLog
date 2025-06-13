@@ -2,7 +2,6 @@ package com.example.moodlog.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.gestures.snapping.SnapPosition.Center.position
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,11 +22,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moodlog.R
 import com.example.moodlog.model.MoodModel
+import com.example.moodlog.ui.theme.Blue_My
 import com.example.moodlog.ui.theme.Gray_My
 import com.example.moodlog.ui.theme.Yellow_My
 
@@ -42,20 +41,17 @@ fun MoodCard(
     val mood = listMood[position].mood
     val description = listMood[position].description
 
-    var isSelected by remember { mutableStateOf(false) }
 
     Card(
         colors = CardDefaults.cardColors(containerColor = Gray_My),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
-            .clickable { isSelected = !isSelected },
+            .padding(10.dp),
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(
             width = 1.dp,
-            color = if (isSelected) Yellow_My else Color.Transparent
+            color = Yellow_My
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
             modifier = Modifier
@@ -68,31 +64,38 @@ fun MoodCard(
             ) {
                 Text(
                     text = description ?: "Sem descrição",
-                    color = Color.Black,
-                    fontSize = 20.sp,
+                    color = Blue_My,
+                    fontSize = 16.sp,
                     modifier = Modifier.weight(1f)
                 )
-                IconButton(onClick = { onDeleteClick?.invoke() }) {
+
+                var pressed by remember { mutableStateOf(false) }
+                IconButton(
+                    onClick = {
+                        pressed = true
+                        onDeleteClick?.invoke()
+                    },
+                    modifier = Modifier.then(
+                        if (pressed) Modifier.padding(2.dp) else Modifier
+                    ),
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_delete),
                         modifier = Modifier
-                            .size(250.dp)
+                            .size(100.dp)
                             .padding(bottom = 10.dp),
-                        tint = Color.Black,
+                        tint = if (pressed) Yellow_My else Blue_My,
                         contentDescription = "Deletar Mood"
                     )
                 }
             }
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp),
-                horizontalArrangement = Arrangement.End
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = mood ?: "Sem humor",
-                    fontSize = 40.sp,
-                    modifier = Modifier.padding(end = 10.dp)
+                    fontSize = 35.sp,
                 )
             }
         }
