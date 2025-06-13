@@ -2,11 +2,13 @@ package com.example.moodlog.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.gestures.snapping.SnapPosition.Center.position
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -32,9 +34,14 @@ import com.example.moodlog.ui.theme.Yellow_My
 
 @Composable
 fun MoodCard(
-    moodModel: MoodModel,
-    onDeleteClick: (() -> Unit)? = null
+    onDeleteClick: (() -> Unit)? = null,
+    position: Int,
+    listMood: MutableList<MoodModel>
 ) {
+
+    val mood = listMood[position].mood
+    val description = listMood[position].description
+
     var isSelected by remember { mutableStateOf(false) }
 
     Card(
@@ -60,13 +67,18 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = moodModel.description ?: "Sem descrição",
+                    text = description ?: "Sem descrição",
+                    color = Color.Black,
                     fontSize = 20.sp,
                     modifier = Modifier.weight(1f)
                 )
                 IconButton(onClick = { onDeleteClick?.invoke() }) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_delete),
+                        modifier = Modifier
+                            .size(250.dp)
+                            .padding(bottom = 10.dp),
+                        tint = Color.Black,
                         contentDescription = "Deletar Mood"
                     )
                 }
@@ -78,7 +90,7 @@ fun MoodCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
-                    text = moodModel.mood ?: "🤔",
+                    text = mood ?: "Sem humor",
                     fontSize = 40.sp,
                     modifier = Modifier.padding(end = 10.dp)
                 )
