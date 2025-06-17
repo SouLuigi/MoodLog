@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moodlog.domain.MoodType
 import com.example.moodlog.ui.theme.Blue_My
+import com.example.moodlog.ui.theme.ShapeBoxEmojiGrid
 import com.example.moodlog.ui.theme.White_My
 import com.example.moodlog.ui.theme.Yellow_My
 
@@ -55,7 +56,7 @@ fun EmojiGrid(
                     .clickable { onEmojiSelect(emoji) }
                     .background(
                         if (emoji == selectedEmoji) Color.LightGray else Color.Transparent,
-                        shape = RoundedCornerShape(8.dp)
+                        shape = ShapeBoxEmojiGrid.small
                     ),
                 contentAlignment = Alignment.Center
             ) {

@@ -13,4 +13,7 @@ class MoodRepository() {
         return dataSource.getMoods()
 
     }
+    fun deleteMood(mood: String){
+        dataSource.deleteMood(mood)
+    }
 }

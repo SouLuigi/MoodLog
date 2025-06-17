@@ -39,8 +39,7 @@ fun AppNavigation() {
                 modifier = Modifier.height(65.dp),
                 containerColor = Yellow_My
             ) {
-                Row(
-                ) {
+                Row() {
                     IconButton(
                         modifier = Modifier
                             .weight(1f)
@@ -87,29 +86,29 @@ fun AppNavigation() {
                             )
                         }
                     }
-                    IconButton(
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(56.dp),
-                        onClick = { navController.navigate(Routes.MOOD_STATISTIC) },
-                        enabled = currentRoute != Routes.MOOD_STATISTIC
-                    ) {
-                        val isSelected = currentRoute == Routes.MOOD_STATISTIC
-                        val iconColor = if (isSelected) Blue_My else White_My
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.icon_chart),
-                                contentDescription = "Estatística de humor",
-                                tint = iconColor
-                            )
-                            Text(
-                                text = "Estátistica",
-                                fontSize = 12.sp,
-                                modifier = Modifier.padding(top = 0.dp),
-                                color = iconColor
-                            )
-                        }
-                    }
+//                    IconButton(
+//                        modifier = Modifier
+//                            .weight(1f)
+//                            .height(56.dp),
+//                        onClick = { navController.navigate(Routes.MOOD_STATISTIC) },
+//                        enabled = currentRoute != Routes.MOOD_STATISTIC
+//                    ) {
+//                        val isSelected = currentRoute == Routes.MOOD_STATISTIC
+//                        val iconColor = if (isSelected) Blue_My else White_My
+//                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+//                            Icon(
+//                                painter = painterResource(id = R.drawable.icon_chart),
+//                                contentDescription = "Estatística de humor",
+//                                tint = iconColor
+//                            )
+//                            Text(
+//                                text = "Estátistica",
+//                                fontSize = 12.sp,
+//                                modifier = Modifier.padding(top = 0.dp),
+//                                color = iconColor
+//                            )
+//                        }
+//                    }
                 }
             }
         },
@@ -129,9 +128,9 @@ fun AppNavigation() {
             ) {
                 MoodHistory(navController)
             }
-            composable(
-                Routes.MOOD_STATISTIC
-            ) { MoodStatistic(navController) }
+//            composable(
+//                Routes.MOOD_STATISTIC
+//            ) { MoodStatistic(navController) }
         }
     }
 }

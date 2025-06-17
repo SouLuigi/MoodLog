@@ -3,6 +3,7 @@ package com.example.moodlog.view
 import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -114,6 +115,7 @@ fun MoodScreen(
         )
 
         ButtonSave(
+
             onClick = {
                 scope.launch{
                     if (selectedEmoji != null && descriptionBox.isNotBlank()) {
@@ -128,6 +130,7 @@ fun MoodScreen(
                     }
                 }
             },
+
             modifier = Modifier
                 .width(262.dp)
                 .height(50.dp)

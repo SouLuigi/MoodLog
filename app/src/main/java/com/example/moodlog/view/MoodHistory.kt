@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,6 +31,7 @@ fun MoodHistory(
     navController: NavController
 ) {
     val moodsRepository = MoodRepository()
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(
@@ -59,7 +61,7 @@ fun MoodHistory(
             modifier = Modifier.padding(innerPadding)
         ) {
             itemsIndexed(listMoods) { position, mood ->
-                MoodCard(position = position, listMood = listMoods)
+                MoodCard(position = position, listMood = listMoods, context = context, navController = navController)
             }
         }
     }
